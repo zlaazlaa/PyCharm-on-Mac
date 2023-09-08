@@ -19,14 +19,8 @@ pause_resume_condition = threading.Condition()
 paused = False
 
 
-# 设置识别中英文两种语言
-# reader = easyocr.Reader(['ch_sim','en'], gpu = False) # need to run only once to load model into memory
-# result = reader.readtext("img1.png", detail = 0)
-# print(result)
-
 def get_ocr(img_no):
     result = reader.readtext("img" + str(img_no) + ".png", detail=0)
-    # print(result)
     for re in result:
         re = re.replace(" ", "")
         if "米" in re:
@@ -63,7 +57,6 @@ def get_2_img():
     while True:
         save_img(10, 400, 200, 700, "img1.png")
         save_img(1200, 400, 1500, 700, "img2.png")
-        # print("fresh img")
         time.sleep(0.2)
 
 
@@ -74,25 +67,14 @@ def fresh_img_all_the_time():
 
 def draw(x, y):
     print("empty")
-    # 创建一个新的图形
     fig, ax = plt.subplots()
-
-    # 创建一个矩形对象
     rectangle = patches.Rectangle((150, 100), 80, 50, linewidth=2, edgecolor='r', facecolor='none')
-
-    # 添加矩形到图形中
     ax.add_patch(rectangle)
-    # 在坐标 (150, 150) 处绘制一个点
     ax.plot(x, y, 'bo', markersize=20, label='点')
-    # 设置坐标轴范围
     ax.set_xlim(0, 800)
     ax.set_ylim(0, 600)
-
-    # 设置坐标轴标签
     ax.set_xlabel('X轴')
     ax.set_ylabel('Y轴')
-
-    # 显示图形
     plt.show()
 
 
@@ -153,12 +135,10 @@ def get_location():
 
 def get_instruct():
     global paused
-
     while True:
         with pause_resume_condition:
             while paused:
                 pause_resume_condition.wait()
-
             instruct = get_location()
             if instruct == -1:
                 print("错误，但没有处理")
@@ -271,7 +251,6 @@ async def connect_to_device(device_address):
 
 def go_to(move):
     global shared_data
-    # print("move is :" + str(shared_data))
     with data_lock:
         print("_-))))))000000000")
         shared_data = move
@@ -297,11 +276,6 @@ if __name__ == '__main__':
     time.sleep(5)
     fresh_img_all_the_time()
     get_instruct_all_the_time()
-    # for a in dict_move:
-    #     print("sending " + a)
-    #     go_to(a)
-    #     time.sleep(5)
-    # go_to("STOP")
     #########
     while True:
         print("666")
