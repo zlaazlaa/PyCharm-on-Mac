@@ -138,7 +138,7 @@ def get_location():
         if min_len + mid_len <= max_len:
             print("不是一个三角形，舍弃")
             return -1
-        if vertical_distance < 50:
+        if vertical_distance < 70:
             return 0
         if math.pi * 5 / 12 <= mid_top_angle <= math.pi * 7 / 12:
             return 3
@@ -237,7 +237,7 @@ from bleak import BleakClient, BleakScanner
 par_write_characteristic = "0000ffe1-0000-1000-8000-00805f9b34fb"
 send_str = bytearray([0x7B, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x7B, 0x7D])
 dict_move = {'go': '7B 00 00 01 BB 00 00 00 00 C1 7D', 'back': '7B 00 00 FF 38 00 00 00 00 BC 7D',
-             'left': '7B 00 00 00 C8 00 00 00 55 E6 7D', 'right': '7B 00 00 00 C8 00 00 FF A0 EC 7D',
+             'left': '7B 00 00 01 A1 00 00 00 55 8E 7D', 'right': '7B 00 00 01 A1 00 00 AA 1A 6B 7D',
              'stop': '7B 00 00 00 00 00 00 00 00 7B 7D'}
 shared_data = None
 data_lock = threading.Lock()
